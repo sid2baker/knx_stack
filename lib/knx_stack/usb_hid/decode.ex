@@ -48,7 +48,7 @@ defmodule KNXStack.USBHID.Decode do
 
   ## Examples
 
-      iex> data = <<0x01, 0x13, 0x11, 0x00, 0x08, 0x00, 0x0B, 0x01, 0x03, 0x00, 0x00, 0x29, 0x00, 0xBC, 0xE0, 0x00, 0x01, 0xAB, 0xCC>>
+      iex> data = <<0x01, 0x13, 0x13, 0x00, 0x08, 0x00, 0x0B, 0x01, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x29, 0x00, 0xBC, 0xE0, 0x00, 0x01, 0xAB, 0xCC>>
       iex> {:ok, msg} = KNXStack.USBHID.Decode.decode_message(data)
       iex> msg.sequence_number
       1
@@ -138,19 +138,20 @@ defmodule KNXStack.USBHID.Decode do
   def decode_packet_info(_), do: {:error, :insufficient_data}
 
   @doc """
-  Decodes the USB protocol header (5 bytes).
+  Decodes the USB protocol header (8 bytes).
 
   Extracts:
   - Protocol version (1 byte)
   - Header length field (1 byte) - constant value 0x08
   - Body length (2 bytes, big-endian) - length of EMI header + payload
   - Protocol ID (1 byte)
+  - Reserved (3 bytes) - ignored
 
   Returns the remaining data which contains the EMI header and payload.
 
   ## Examples
 
-      iex> data = <<0x00, 0x08, 0x00, 0x05, 0x01, 0x03, 0x00, 0x00, 0xAA, 0xBB>>
+      iex> data = <<0x00, 0x08, 0x00, 0x05, 0x01, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0xAA, 0xBB>>
       iex> {:ok, info, rest} = KNXStack.USBHID.Decode.decode_usb_protocol_header(data)
       iex> info.protocol_id
       :knx_tunnel
@@ -169,7 +170,8 @@ defmodule KNXStack.USBHID.Decode do
            }, binary()}
           | {:error, atom()}
   def decode_usb_protocol_header(
-        <<version, header_length, body_length::16, protocol_id_byte, rest::binary>>
+        <<version, header_length, body_length::16, protocol_id_byte, _reserved::24,
+          rest::binary>>
       ) do
     case Protocol.byte_to_protocol_id(protocol_id_byte) do
       {:ok, protocol_id} ->
@@ -216,7 +218,7 @@ defmodule KNXStack.USBHID.Decode do
 
   ## Examples
 
-      iex> data = <<0x01, 0x13, 0x13, 0x00, 0x08, 0x00, 0x0B, 0x01, 0x03, 0x00, 0x00, 0x29, 0x00, 0xBC, 0xE0, 0x00, 0x01, 0xAB, 0xCC>>
+      iex> data = <<0x01, 0x13, 0x13, 0x00, 0x08, 0x00, 0x0B, 0x01, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x29, 0x00, 0xBC, 0xE0, 0x00, 0x01, 0xAB, 0xCC>>
       iex> KNXStack.USBHID.Decode.extract_payload(data)
       {:ok, <<0x29, 0x00, 0xBC, 0xE0, 0x00, 0x01, 0xAB, 0xCC>>}
   """

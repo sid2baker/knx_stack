@@ -21,3 +21,5 @@ knx_stack-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+/.expert/

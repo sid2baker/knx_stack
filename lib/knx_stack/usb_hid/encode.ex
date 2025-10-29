@@ -83,13 +83,14 @@ defmodule KNXStack.USBHID.Encode do
   end
 
   @doc """
-  Encodes the USB protocol header (5 bytes).
+  Encodes the USB protocol header (8 bytes).
 
   Adds:
   - Protocol version (1 byte): KNX_USB_TRANSFER_PROTOCOL (0x00)
   - Header length field (1 byte): KNX_USB_TRANSFER_PROTOCOL_HEADER_LENGTH (0x08) - constant value
   - Body length (2 bytes): length of the emi_data (EMI header + payload)
   - Protocol ID (1 byte): protocol identifier
+  - Reserved (3 bytes): 0x00, 0x00, 0x00
 
   The emi_data parameter should already include the EMI header (3 bytes) + payload.
 
@@ -98,7 +99,7 @@ defmodule KNXStack.USBHID.Encode do
       iex> emi_data = <<0x03, 0x00, 0x00, 0x29, 0x00>>
       iex> result = KNXStack.USBHID.Encode.encode_usb_protocol_header(emi_data, :knx_tunnel)
       iex> byte_size(result)
-      10
+      13
   """
   @spec encode_usb_protocol_header(binary(), Protocol.protocol_id()) :: binary()
   def encode_usb_protocol_header(emi_data, protocol_id) do
@@ -107,8 +108,9 @@ defmodule KNXStack.USBHID.Encode do
     body_length = byte_size(emi_data)
     protocol_id_byte = Protocol.protocol_id_to_byte(protocol_id)
 
-    # USB protocol header is 5 bytes, followed by the EMI data
-    <<protocol_version, header_length, body_length::16, protocol_id_byte>> <> emi_data
+    # USB protocol header is 8 bytes (including 3 reserved bytes), followed by the EMI data
+    <<protocol_version, header_length, body_length::16, protocol_id_byte, 0x00, 0x00, 0x00>> <>
+      emi_data
   end
 
   @doc """

@@ -178,9 +178,10 @@ defmodule KNXStack.USBHIDTest do
 
   describe "compatibility with Python implementation" do
     test "decodes Python-generated message correctly" do
-      # This hex string is from the Python implementation doctest:
-      # >>> msg = knx_stack.Msg.make_from_str("0113130008000B010300002900BCE00001ABCC010081")
-      hex_string = "0113130008000B010300002900BCE00001ABCC010081"
+      # Updated hex string with 3 reserved bytes (000000) after protocol_id (01)
+      # Old format: "0113130008000B010300002900BCE00001ABCC010081"
+      # New format: adds 000000 after protocol_id
+      hex_string = "0113130008000B010000000300002900BCE00001ABCC"
       data = Base.decode16!(hex_string, case: :mixed)
 
       {:ok, decoded} = USBHID.decode(data)
