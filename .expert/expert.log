@@ -1,0 +1,378 @@
+18:46:16.906 [debug] Child {XPLoggerFileBackend, :general_log} of Supervisor Logger.Backends.Supervisor started
+Pid: #PID<0.102.0>
+Start Call: Logger.Backends.Watcher.start_link({{XPLoggerFileBackend, :general_log}, {XPLoggerFileBackend, :general_log}})
+Restart: :transient
+Shutdown: 5000
+Type: :worker
+18:46:16.907 [info] Child Logger.Backends.Supervisor of Supervisor Logger.Backends.Internal started
+Pid: #PID<0.101.0>
+Start Call: Logger.Backends.Supervisor.start_link([{XPLoggerFileBackend, :general_log}])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+18:46:16.907 [info] Child Logger.Backends.Internal of Supervisor Logger.Supervisor started
+Pid: #PID<0.97.0>
+Start Call: Logger.Backends.Internal.start_link([])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+18:46:16.907 [info] Application logger started at :nonode@nohost
+18:46:16.907 [info] Application xp_mime started at :nonode@nohost
+18:46:16.907 [info] Application xp_hpax started at :nonode@nohost
+18:46:16.907 [info] Application crypto started at :nonode@nohost
+18:46:16.907 [info] Application asn1 started at :nonode@nohost
+18:46:16.907 [info] Application public_key started at :nonode@nohost
+18:46:16.910 [debug] Child :ssl_handler of Supervisor :logger_sup started
+Pid: #PID<0.107.0>
+Start Call: :logger_olp.start_link(:logger_std_h_ssl_handler, :logger_h_common, %{id: :ssl_handler, module: :logger_std_h, config: %{type: :standard_io, filesync_repeat_interval: :no_repeat}, level: :debug, filters: [], filter_default: :stop, formatter: {:ssl_logger, %{}}}, %{})
+Restart: :temporary
+Shutdown: 2000
+Type: :worker
+18:46:16.913 [info] Child :ssl_pem_cache of Supervisor :ssl_admin_sup started
+Pid: #PID<0.111.0>
+Start Call: :ssl_pem_cache.start_link([])
+Restart: :permanent
+Shutdown: 4000
+Type: :worker
+18:46:16.915 [info] Child :ssl_manager of Supervisor :ssl_admin_sup started
+Pid: #PID<0.112.0>
+Start Call: :ssl_manager.start_link([])
+Restart: :permanent
+Shutdown: 4000
+Type: :worker
+18:46:16.916 [info] Child :tls_client_ticket_store of Supervisor :ssl_admin_sup started
+Pid: #PID<0.113.0>
+Start Call: :tls_client_ticket_store.start_link(1000, 7200)
+Restart: :permanent
+Shutdown: 4000
+Type: :worker
+18:46:16.916 [info] Child :ssl_admin_sup of Supervisor :ssl_sup started
+Pid: #PID<0.110.0>
+Start Call: :ssl_admin_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.917 [info] Child :tls_connection_sup of Supervisor :tls_sup started
+Pid: #PID<0.116.0>
+Start Call: :tls_connection_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.918 [info] Child :ssl_listen_tracker_sup of Supervisor :tls_server_sup started
+Pid: #PID<0.118.0>
+Start Call: :ssl_listen_tracker_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.918 [info] Child :tls_server_session_ticket of Supervisor :tls_server_sup started
+Pid: #PID<0.119.0>
+Start Call: :tls_server_session_ticket_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.919 [info] Child :ssl_server_session_cache_sup of Supervisor :tls_server_sup started
+Pid: #PID<0.120.0>
+Start Call: :ssl_server_session_cache_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.919 [info] Child :ssl_upgrade_server_session_cache_sup of Supervisor :tls_server_sup started
+Pid: #PID<0.121.0>
+Start Call: :ssl_upgrade_server_session_cache_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.919 [info] Child :tls_server_sup of Supervisor :tls_sup started
+Pid: #PID<0.117.0>
+Start Call: :tls_server_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.919 [info] Child :tls_sup of Supervisor :ssl_connection_sup started
+Pid: #PID<0.115.0>
+Start Call: :tls_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.921 [info] Child :dtls_connection_sup of Supervisor :dtls_sup started
+Pid: #PID<0.123.0>
+Start Call: :dtls_connection_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.922 [info] Child :dtls_listener_sup of Supervisor :dtls_server_sup started
+Pid: #PID<0.125.0>
+Start Call: :dtls_listener_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.922 [info] Child :dtls_server_session_cache_sup of Supervisor :dtls_server_sup started
+Pid: #PID<0.126.0>
+Start Call: :dtls_server_session_cache_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.922 [info] Child :dtls_server_sup of Supervisor :dtls_sup started
+Pid: #PID<0.124.0>
+Start Call: :dtls_server_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.922 [info] Child :dtls_sup of Supervisor :ssl_connection_sup started
+Pid: #PID<0.122.0>
+Start Call: :dtls_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.922 [info] Child :ssl_connection_sup of Supervisor :ssl_sup started
+Pid: #PID<0.114.0>
+Start Call: :ssl_connection_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+18:46:16.923 [info] Application ssl started at :nonode@nohost
+18:46:16.923 [info] Application xp_mint started at :nonode@nohost
+18:46:16.923 [info] Application xp_nimble_options started at :nonode@nohost
+18:46:16.927 [info] Child XPNimblePool.TaskSupervisor of Supervisor #PID<0.132.0> (Supervisor.Default) started
+Pid: #PID<0.133.0>
+Start Call: Task.Supervisor.start_link([name: XPNimblePool.TaskSupervisor])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+18:46:16.927 [info] Application xp_nimble_pool started at :nonode@nohost
+18:46:16.929 [info] Child :telemetry_handler_table of Supervisor :telemetry_sup started
+Pid: #PID<0.137.0>
+Start Call: :telemetry_handler_table.start_link()
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:16.929 [info] Application xp_telemetry started at :nonode@nohost
+18:46:16.929 [info] Application xp_finch started at :nonode@nohost
+18:46:16.946 [info] Child XPReq.Finch.PIDPartition0 of Supervisor XPReq.Finch started
+Pid: #PID<0.143.0>
+Start Call: Registry.Partition.start_link(XPReq.Finch.PIDPartition0, {:duplicate, XPReq.Finch, 0, 1, XPReq.Finch.KeyPartition0, XPReq.Finch.PIDPartition0, [], false})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:16.946 [info] Child XPReq.Finch of Supervisor XPReq.Finch.Supervisor started
+Pid: #PID<0.142.0>
+Start Call: Registry.start_link([keys: :duplicate, name: XPReq.Finch, meta: [config: %{pools: %{}, registry_name: XPReq.Finch, supervisor_name: XPReq.Finch.PoolSupervisor, manager_name: XPReq.Finch.PoolManager, default_pool_config: %{count: 1, size: 50, mod: XPFinch.HTTP1.Pool, conn_opts: [protocols: [:http1], transport_opts: [keepalive: true, nodelay: true, timeout: 5000], ssl_key_log_file_device: nil], pool_max_idle_time: :infinity, conn_max_idle_time: :infinity, start_pool_metrics?: false}}]])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+18:46:16.946 [info] Child XPReq.Finch.PoolSupervisor of Supervisor XPReq.Finch.Supervisor started
+Pid: #PID<0.144.0>
+Start Call: DynamicSupervisor.start_link([name: XPReq.Finch.PoolSupervisor, strategy: :one_for_one])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+18:46:16.946 [info] Child XPFinch.PoolManager of Supervisor XPReq.Finch.Supervisor started
+Pid: #PID<0.145.0>
+Start Call: XPFinch.PoolManager.start_link(%{pools: %{}, registry_name: XPReq.Finch, supervisor_name: XPReq.Finch.PoolSupervisor, manager_name: XPReq.Finch.PoolManager, default_pool_config: %{count: 1, size: 50, mod: XPFinch.HTTP1.Pool, conn_opts: [protocols: [:http1], transport_opts: [keepalive: true, nodelay: true, timeout: 5000], ssl_key_log_file_device: nil], pool_max_idle_time: :infinity, conn_max_idle_time: :infinity, start_pool_metrics?: false}})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:16.947 [info] Child XPReq.Finch of Supervisor #PID<0.140.0> (Supervisor.Default) started
+Pid: #PID<0.141.0>
+Start Call: XPFinch.start_link([name: XPReq.Finch, pools: %{default: [protocols: [:http1]]}])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:16.947 [info] Child XPReq.FinchSupervisor of Supervisor #PID<0.140.0> (Supervisor.Default) started
+Pid: #PID<0.146.0>
+Start Call: DynamicSupervisor.start_link([strategy: :one_for_one, name: XPReq.FinchSupervisor])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+18:46:16.947 [info] Child XPReq.Test.Ownership of Supervisor #PID<0.140.0> (Supervisor.Default) started
+Pid: #PID<0.147.0>
+Start Call: XPReq.Test.Ownership.start_link([name: XPReq.Test.Ownership])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:16.947 [info] Application xp_req started at :nonode@nohost
+18:46:16.947 [info] Application burrito started at :nonode@nohost
+18:46:16.947 [info] Application erts started at :nonode@nohost
+18:46:16.947 [info] Application xp_schematic started at :nonode@nohost
+18:46:16.947 [info] Application xp_typed_struct started at :nonode@nohost
+18:46:16.947 [info] Application xp_gen_lsp started at :nonode@nohost
+18:46:16.953 [info] Child XPSnowflake.Generator of Supervisor #PID<0.150.0> (Supervisor.Default) started
+Pid: #PID<0.151.0>
+Start Call: XPSnowflake.Generator.start_link(0, 1023)
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:16.953 [info] Application xp_snowflake started at :nonode@nohost
+18:46:16.953 [info] Application xp_sourceror started at :nonode@nohost
+18:46:16.953 [info] Application xp_forge started at :nonode@nohost
+18:46:16.953 [info] Application xp_logger_file_backend started at :nonode@nohost
+18:46:16.956 [info] Child :ttb_autostart of Supervisor :runtime_tools_sup started
+Pid: #PID<0.155.0>
+Start Call: :ttb_autostart.start_link()
+Restart: :temporary
+Shutdown: 3000
+Type: :worker
+18:46:16.956 [info] Application runtime_tools started at :nonode@nohost
+18:46:16.956 [info] Application et started at :nonode@nohost
+18:46:16.956 [info] Application observer started at :nonode@nohost
+18:46:16.956 [info] Application xp_path_glob started at :nonode@nohost
+18:46:16.962 [info] Child XPForge.Document.Store of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.159.0>
+Start Call: XPForge.Document.Store.start_link([derive: [analysis: &XPForge.Ast.analyze/1]])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:16.963 [info] Child XPExpert.ProjectSupervisor of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.160.0>
+Start Call: DynamicSupervisor.start_link([name: XPExpert.ProjectSupervisor, strategy: :one_for_one])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+18:46:16.963 [info] Child XPExpert.DynamicSupervisor of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.161.0>
+Start Call: DynamicSupervisor.start_link([name: XPExpert.DynamicSupervisor])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+18:46:16.964 [info] Child XPGenLSP.Assigns of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.162.0>
+Start Call: XPGenLSP.Assigns.start_link([name: XPExpert.Assigns])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:16.964 [info] Child :expert_task_queue of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.163.0>
+Start Call: Task.Supervisor.start_link([name: :expert_task_queue])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+18:46:16.964 [info] Child XPGenLSP.Buffer of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.164.0>
+Start Call: XPGenLSP.Buffer.start_link([name: XPExpert.Buffer])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:16.964 [debug] [name: XPExpert, buffer: XPExpert.Buffer, task_supervisor: :expert_task_queue, dynamic_supervisor: XPExpert.DynamicSupervisor, assigns: XPExpert.Assigns]
+18:46:16.967 [info] Child XPExpert of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.165.0>
+Start Call: XPExpert.start_link([name: XPExpert, buffer: XPExpert.Buffer, task_supervisor: :expert_task_queue, dynamic_supervisor: XPExpert.DynamicSupervisor, assigns: XPExpert.Assigns])
+Restart: :permanent
+Shutdown: 500
+Type: :worker
+18:46:16.967 [info] Application xp_expert started at :nonode@nohost
+18:46:17.019 [info] Starting project at uri file:///home/n0gg1n/Development/Work/nerves/knx-stack/knx_stack
+18:46:17.032 [info] Child {XPExpert.Project.Progress, "knx_stack"} of Supervisor :"knx_stack::supervisor" started
+Pid: #PID<0.170.0>
+Start Call: XPExpert.Project.Progress.start_link(%XPForge.Project{root_uri: "file:///home/n0gg1n/Development/Work/nerves/knx-stack/knx_stack", mix_exs_uri: "file:///home/n0gg1n/Development/Work/nerves/knx-stack/knx_stack/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 13204})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:17.033 [info] Child {XPExpert.EngineSupervisor, "knx_stack"} of Supervisor :"knx_stack::supervisor" started
+Pid: #PID<0.171.0>
+Start Call: XPExpert.EngineSupervisor.start_link(%XPForge.Project{root_uri: "file:///home/n0gg1n/Development/Work/nerves/knx-stack/knx_stack", mix_exs_uri: "file:///home/n0gg1n/Development/Work/nerves/knx-stack/knx_stack/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 13204})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+18:46:17.037 [debug] sent request server -> client window/workDoneProgress/create
+18:46:17.044 [info] Child :erl_epmd of Supervisor :net_sup started
+Pid: #PID<0.174.0>
+Start Call: :erl_epmd.start_link()
+Restart: :permanent
+Shutdown: 2000
+Type: :worker
+18:46:17.046 [info] Child :auth of Supervisor :net_sup started
+Pid: #PID<0.175.0>
+Start Call: :auth.start_link()
+Restart: :permanent
+Shutdown: 2000
+Type: :worker
+18:46:17.047 [debug] sent notification server -> client $/progress
+18:46:17.052 [info] Child :net_kernel of Supervisor :net_sup started
+Pid: #PID<0.176.0>
+Start Call: :net_kernel.start_link(%{name: :"manager-knx_stack-13204@127.0.0.1", supervisor: :net_sup_dynamic, name_domain: :longnames, clean_halt: false})
+Restart: :permanent
+Shutdown: 2000
+Type: :worker
+18:46:17.052 [debug] Child :net_sup_dynamic of Supervisor :kernel_sup started
+Pid: #PID<0.173.0>
+Start Call: :erl_distribution.start_link(%{name: :"manager-knx_stack-13204@127.0.0.1", supervisor: :net_sup_dynamic, name_domain: :longnames, clean_halt: false})
+Restart: :permanent
+Shutdown: 1000
+Type: :supervisor
+18:46:17.097 [debug] handled request client -> server initialize in 123ms
+18:46:17.104 [debug] sent request server -> client client/registerCapability
+18:46:17.112 [debug] handled notification client -> server workspace/didChangeConfiguration in 13ms
+18:46:17.119 [info] ################### opened file:///home/n0gg1n/Development/Work/nerves/knx-stack/knx_stack/lib/knx_stack/usb_hid.ex
+18:46:17.120 [debug] handled notification client -> server textDocument/didOpen in 19ms
+18:46:17.123 [debug] handled notification client -> server initialized in 25ms
+18:46:17.510 [debug] sent notification server -> client window/logMessage
+18:46:17.519 [debug] sent notification server -> client window/logMessage
+18:46:17.519 [debug] sent request server -> client window/workDoneProgress/create
+18:46:17.523 [debug] sent notification server -> client $/progress
+18:46:19.939 [debug] sent notification server -> client window/logMessage
+18:46:19.939 [debug] handled request client -> server textDocument/hover in 3ms
+18:46:20.130 [debug] handled notification client -> server $/cancelRequest in 2ms
+18:46:20.408 [debug] sent notification server -> client window/logMessage
+18:46:20.408 [debug] handled request client -> server textDocument/hover in 685µs
+18:46:20.447 [debug] handled notification client -> server $/cancelRequest in 152µs
+18:46:25.075 [info] ################### opened file:///home/n0gg1n/Development/Work/nerves/knx-stack/knx_stack/test/knx_stack_test.exs
+18:46:25.075 [debug] handled notification client -> server textDocument/didOpen in 712µs
+18:46:25.092 [debug] handled notification client -> server textDocument/didClose in 1ms
+18:46:25.348 [debug] sent notification server -> client window/logMessage
+18:46:25.349 [debug] handled request client -> server textDocument/codeAction in 19ms
+18:46:25.364 [debug] sent notification server -> client window/logMessage
+18:46:25.365 [debug] handled request client -> server textDocument/codeLens in 6ms
+18:46:27.668 [info] ################### opened file:///home/n0gg1n/Development/Work/nerves/knx-stack/knx_stack/test/knx_stack/usb_hid_test.exs
+18:46:27.668 [debug] handled notification client -> server textDocument/didOpen in 4ms
+18:46:27.688 [debug] handled notification client -> server textDocument/didClose in 331µs
+18:46:27.688 [debug] handled notification client -> server $/cancelRequest in 177µs
+18:46:27.688 [debug] handled notification client -> server $/cancelRequest in 120µs
+18:46:27.912 [debug] sent notification server -> client window/logMessage
+18:46:27.912 [debug] handled request client -> server textDocument/codeAction in 2ms
+18:46:27.942 [debug] sent notification server -> client window/logMessage
+18:46:27.942 [debug] handled request client -> server textDocument/codeLens in 1ms
+18:46:29.280 [debug] sent notification server -> client window/logMessage
+18:46:29.280 [debug] handled request client -> server textDocument/hover in 1ms
+18:46:29.344 [debug] handled notification client -> server $/cancelRequest in 850µs
+18:46:29.719 [debug] sent notification server -> client window/logMessage
+18:46:29.719 [debug] handled request client -> server textDocument/hover in 329µs
+18:46:30.214 [debug] handled notification client -> server $/cancelRequest in 324µs
+18:46:30.534 [debug] sent notification server -> client window/logMessage
+18:46:30.534 [debug] handled request client -> server textDocument/hover in 489µs
+18:46:30.831 [debug] handled notification client -> server $/cancelRequest in 238µs
+18:46:31.408 [debug] sent notification server -> client window/logMessage
+18:46:31.409 [debug] handled request client -> server textDocument/hover in 855µs
+18:46:31.600 [debug] handled notification client -> server $/cancelRequest in 351µs
+18:46:32.314 [debug] sent notification server -> client window/logMessage
+18:46:32.314 [debug] handled request client -> server textDocument/hover in 406µs
+18:46:32.386 [debug] handled notification client -> server $/cancelRequest in 295µs
+18:46:32.676 [debug] sent notification server -> client window/logMessage
+18:46:32.677 [debug] handled request client -> server textDocument/hover in 1ms
+18:46:32.925 [debug] handled notification client -> server $/cancelRequest in 633µs
+18:46:33.124 [debug] sent notification server -> client window/logMessage
+18:46:33.125 [debug] handled request client -> server textDocument/hover in 600µs
+18:46:34.071 [debug] handled notification client -> server $/cancelRequest in 696µs
+18:46:34.271 [debug] sent notification server -> client window/logMessage
+18:46:34.272 [debug] handled request client -> server textDocument/hover in 1ms
+18:46:35.387 [debug] handled notification client -> server $/cancelRequest in 131µs
+18:46:42.996 [debug] sent notification server -> client window/logMessage
+18:46:42.996 [debug] handled request client -> server textDocument/hover in 304µs
+18:46:43.677 [debug] handled notification client -> server $/cancelRequest in 535µs
+18:46:44.734 [debug] sent notification server -> client window/logMessage
+18:46:44.734 [debug] handled request client -> server textDocument/hover in 285µs
+18:46:44.771 [debug] handled notification client -> server $/cancelRequest in 192µs
+18:46:44.972 [debug] sent notification server -> client window/logMessage
+18:46:44.972 [debug] handled request client -> server textDocument/hover in 358µs
+18:46:45.144 [debug] handled notification client -> server $/cancelRequest in 341µs
+18:46:46.248 [debug] sent notification server -> client window/logMessage
+18:46:46.248 [debug] handled request client -> server textDocument/hover in 983µs
+18:46:46.333 [debug] handled notification client -> server $/cancelRequest in 180µs
+18:46:46.534 [debug] sent notification server -> client window/logMessage
+18:46:46.534 [debug] handled request client -> server textDocument/hover in 327µs
+18:46:47.164 [debug] handled notification client -> server $/cancelRequest in 472µs
+18:46:47.414 [debug] sent notification server -> client window/logMessage
+18:46:47.414 [debug] handled request client -> server textDocument/hover in 316µs
+18:46:47.517 [debug] handled notification client -> server $/cancelRequest in 161µs
+18:46:47.718 [debug] sent notification server -> client window/logMessage
+18:46:47.718 [debug] handled request client -> server textDocument/hover in 351µs
+18:46:51.628 [debug] handled notification client -> server $/cancelRequest in 661µs
