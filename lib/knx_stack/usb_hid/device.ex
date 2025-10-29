@@ -42,8 +42,12 @@ defmodule KNXStack.USBHID.Device do
   ## Architecture
 
   The Device GenServer spawns a separate reader process to avoid blocking on I/O.
-  The reader continuously reads from the device file and sends messages back to
-  the GenServer, which then decodes frames and invokes handler callbacks.
+  The reader process opens its own file handle for reading (each process must own
+  its file descriptor in Erlang/Elixir). The reader continuously reads from the
+  device and sends messages back to the GenServer, which decodes frames and invokes
+  handler callbacks.
+
+  The GenServer maintains a separate file handle for writing frames to the device.
 
   This design ensures the GenServer remains responsive for send operations and
   other messages while waiting for incoming data.
@@ -190,8 +194,8 @@ defmodule KNXStack.USBHID.Device do
 
         case invoke_handler(:handle_connected, [device_info, state.handler_state], state) do
           {:ok, new_state} ->
-            # Start reader process
-            reader_pid = spawn_reader(self(), device_file, state.read_size)
+            # Start reader process - it will open its own file handle
+            reader_pid = spawn_reader(self(), state.device_path, state.read_size)
             reader_ref = Process.monitor(reader_pid)
 
             new_state = %{new_state | reader_pid: reader_pid, reader_ref: reader_ref}
@@ -280,8 +284,18 @@ defmodule KNXStack.USBHID.Device do
     File.close(device_file)
   end
 
-  defp spawn_reader(parent_pid, device_file, read_size) do
-    spawn_link(fn -> reader_loop(parent_pid, device_file, read_size) end)
+  defp spawn_reader(parent_pid, device_path, read_size) do
+    spawn_link(fn ->
+      # Each process must open its own file handle
+      case File.open(device_path, [:read, :binary, :raw]) do
+        {:ok, device_file} ->
+          reader_loop(parent_pid, device_file, read_size)
+          File.close(device_file)
+
+        {:error, reason} ->
+          send(parent_pid, {:reader_error, reason})
+      end
+    end)
   end
 
   defp reader_loop(parent_pid, device_file, read_size) do
